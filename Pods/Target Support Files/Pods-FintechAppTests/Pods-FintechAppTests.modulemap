@@ -1,0 +1,6 @@
+framework module Pods_FintechAppTests {
+  umbrella header "Pods-FintechAppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

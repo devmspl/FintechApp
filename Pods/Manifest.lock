@@ -1,0 +1,33 @@
+PODS:
+  - Alamofire (5.4.3)
+  - AlamofireImage (4.2.0):
+    - Alamofire (~> 5.4)
+  - ARSLineProgress (3.1.0)
+  - DropDown (2.3.13)
+  - IQKeyboardManagerSwift (6.5.6)
+
+DEPENDENCIES:
+  - Alamofire
+  - AlamofireImage
+  - ARSLineProgress
+  - DropDown
+  - IQKeyboardManagerSwift
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - AlamofireImage
+    - ARSLineProgress
+    - DropDown
+    - IQKeyboardManagerSwift
+
+SPEC CHECKSUMS:
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
+  ARSLineProgress: 60778657c69491796c3faf5b834c72924c405833
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+
+PODFILE CHECKSUM: 4900b16a8e0edc92f3c3a5c115da65ad9373a415
+
+COCOAPODS: 1.10.1
