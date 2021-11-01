@@ -31,3 +31,23 @@ struct CategoryModel{
         
     }
 }
+
+struct SubCategoryModel{
+    var id:String = ""
+    var name: String = ""
+    var pdfLink: String = ""
+    var description: String = ""
+    var imageUrl: String = ""
+
+    
+    init(subcategoryDetails:[String:Any]) {
+        
+        id = subcategoryDetails["id"] as? String ?? ""
+        name = subcategoryDetails["name"] as? String ?? ""
+        pdfLink = subcategoryDetails["pdfLink"] as? String ?? ""
+        description = subcategoryDetails["description"] as? String ?? ""
+        imageUrl = subcategoryDetails["imageUrl"] as? String ?? ""
+    
+}
+    
+}

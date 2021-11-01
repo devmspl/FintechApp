@@ -17,7 +17,7 @@ class ApiManager{
     
     func SignUpAPI(model: CreateUserModel, completionHandler: @escaping (Bool) -> ()){
         if ReachabilityNetwork.isConnectedToNetwork(){
-            ARSLineProgress.show()
+           // ARSLineProgress.show()
             AF.request(APIs.createUser, method: .post, parameters: model, encoder: JSONParameterEncoder.default).response{
                 respone in
                 print(respone)
@@ -52,7 +52,7 @@ class ApiManager{
     
     func loginApi(model: LoginModel,completionHandler: @escaping (Bool) ->()){
         if ReachabilityNetwork.isConnectedToNetwork(){
-            ARSLineProgress.show()
+            //ARSLineProgress.show()
             AF.request(APIs.login,method: .post,parameters: model,encoder: JSONParameterEncoder.default).response{
                 response in
                 switch(response.result){
@@ -93,7 +93,7 @@ class ApiManager{
 //MARK:- FORGET PASSWORD
     func ForgetPassword(model: ForgetPasswordModel, completionHandler: @escaping (Bool) -> ()){
         if ReachabilityNetwork.isConnectedToNetwork(){
-            ARSLineProgress.show()
+           // ARSLineProgress.show()
             AF.request(APIs.forgotPassword, method: .post, parameters: model, encoder: JSONParameterEncoder.default).response{
                 response in
                 print(response)
@@ -125,6 +125,7 @@ class ApiManager{
     }
 
  //MARK:- CATEGORY API
- 
+    
+   
 }
 

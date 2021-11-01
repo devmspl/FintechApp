@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
+import ARSLineProgress
 
 class PortfolioVC: UIViewController {
 
     @IBOutlet weak var portImage: UIImageView!
     @IBOutlet weak var portLabel: UILabel!
+    var productid = ""
     @IBOutlet weak var userTable: UITableView!{
         didSet{
             userTable.tableFooterView = UIView(frame: .zero)
@@ -33,6 +37,42 @@ class PortfolioVC: UIViewController {
             graphView[i].layer.borderColor = UIColor.gray.cgColor
         }
        
+    }
+    
+    func GetProductbyID(){
+        if ReachabilityNetwork.isConnectedToNetwork(){
+            //ARSLineProgress.show()
+            AF.request(APIs.productbyId+productid, method: .get).response{ [self]
+                response in
+                print(response)
+                switch response.result{
+                case .success(let data):
+                    do{
+                        let json = try JSONSerialization.jsonObject(with: data!, options: [])
+                        print(json)
+                        if response.response?.statusCode == 200 {
+                            ARSLineProgress.hide()
+                             let response = json as! NSDictionary
+                             let data = response.object(forKey: "data") as! [AnyObject]
+                            
+                           
+                        }else{
+                            ARSLineProgress.hide()
+                        }
+                    }catch{
+                        print(error.localizedDescription)
+                       
+                        ARSLineProgress.hide()
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    ARSLineProgress.hide()
+                }
+            }
+        }else{
+            ARSLineProgress.hide()
+        }
+        
     }
     
     @IBAction func backTapped(_ sender: Any) {
