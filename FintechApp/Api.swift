@@ -21,6 +21,10 @@ public struct APIs{
     
 //MARK:- PRODUCT API
     
-    public static let favourite         = baseURL+"products/favList/"
+    public static let favourite               = baseURL+"products/favList/"
+    public static let productbycatApi         = baseURL+"products/listByCatId/"
+    
+    public static let productbyId         = baseURL+"products/byId/"
+
     
 }
