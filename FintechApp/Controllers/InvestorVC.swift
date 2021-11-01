@@ -8,6 +8,7 @@
 import UIKit
 import Alamofire
 import ARSLineProgress
+import AlamofireImage
 
 class InvestorVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
 //outlets
@@ -15,12 +16,14 @@ class InvestorVC: UIViewController,UICollectionViewDelegate,UICollectionViewData
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var lowerCollection: UICollectionView!
     
-    var catArray = [CategoryModel]()
+    var catArray = [AnyObject]()
+   // var Catmodel : CategoryModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-cat()
+         cat()
    }
+    
 //collectionViewFunction
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == upperCollection{
@@ -33,7 +36,7 @@ cat()
     
     func cat(){
         if ReachabilityNetwork.isConnectedToNetwork(){
-            ARSLineProgress.show()
+            //ARSLineProgress.show()
             AF.request(APIs.categoryApi, method: .get).response{ [self]
                 response in
                 print(response)
@@ -45,15 +48,9 @@ cat()
                         if response.response?.statusCode == 200 {
                             ARSLineProgress.hide()
                              let response = json as! NSDictionary
-                            if let alldata = response.object(forKey: "data") as? [[String: Any]]{
-
-                                for i in alldata{
-                                    self.catArray += [CategoryModel(categoryDetails: i)]
-                                }
-                                print(catArray)
-                                //print(alldata)
-                            }
-                        
+                             let data = response.object(forKey: "data") as! [AnyObject]
+                            self.catArray = data
+                           
                             self.lowerCollection.reloadData()
                            
                         }else{
@@ -82,11 +79,22 @@ cat()
         }
         else{
             let cell = lowerCollection.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryCell
-            let model = catArray[indexPath.item]
-            cell.config(with: model)
-            return cell
+            cell.catName.text = catArray[indexPath.item]["name"] as? String
+            if let image = catArray[indexPath.item]["imageUrl"] as? String{
+                if image != ""{
+                    let url = URL(string: image)
+                    cell.img.af.setImage(withURL: url!)
+                }else{
+                    cell.img.image = UIImage(named: "agri")
+                }
+           
+            
         }
+            return cell
     }
+        
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == upperCollection{
             return CGSize(width: upperCollection.frame.width, height: upperCollection.frame.height)
@@ -94,9 +102,11 @@ cat()
             return CGSize(width: lowerCollection.frame.width/2, height: lowerCollection.frame.height/2)
         }
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == lowerCollection{
         let vc = storyboard?.instantiateViewController(withIdentifier: "SubCategoryVC") as! SubCategoryVC
+        vc.categoryKiid = catArray[indexPath.item]["id"] as! String
         self.navigationController?.pushViewController(vc, animated: true)
     }
     }

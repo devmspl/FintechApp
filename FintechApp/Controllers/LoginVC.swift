@@ -12,6 +12,7 @@ class LoginVC: UIViewController {
 
     @IBOutlet var textFields: [UITextField]!
     @IBOutlet weak var btnViews: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,13 +38,18 @@ class LoginVC: UIViewController {
         let vc = storyboard?.instantiateViewController(withIdentifier: "SignUpVC") as! SignUpVC
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
     @IBAction func loginWithGoogle(_ sender: Any) {
+        
     }
+    
     @IBAction func forgetPassword(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "ForgetPasswordVC") as! ForgetPasswordVC
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
     @IBAction func showPassword(_ sender: Any) {
+        
     }
     
 }
